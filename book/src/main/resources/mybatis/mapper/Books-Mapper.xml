@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rm.book.mapper.BooksMapper">
+
+<select id="listBook"  resultType="BooksVO">
+	select * from books
+</select>
+
+<select id="getBook"  parameterType="BooksVO" resultType="BooksVO">
+	select * from books where book_no=#{bookNo}
+</select>
+
+<insert id="insertBook" parameterType="BooksVO">
+	insert into books(book_no,book_name,book_writer,book_pub,book_cg,book_pubdate,book_regdate,book_intro,book_img,book_loanyn)
+	values(seq_books.nextval,#{bookName},#{bookWriter},#{bookPub},#{bookCg},#{bookPubdate},sysdate,#{bookIntro},#{bookImg},#{bookLoanyn})
+</insert>
+
+<update id="updateBook" parameterType="BooksVO">
+	UPDATE books
+ 	SET 
+ 	book_no=#{bookNo},
+ 	book_name=#{bookName},
+ 	book_writer=#{bookWriter},
+ 	book_pub=#{bookPub},
+ 	book_cg=#{bookCg},
+ 	book_pubdate=#{bookPubdate},
+ 	book_regdate=#{bookRegdate},
+ 	book_intro=#{bookIntro},
+ 	book_img=#{bookImg},
+ 	book_loanyn=#{bookLoanyn}
+	WHERE
+	book_no=#{bookNo}
+</update>
+
+<delete id="deleteBook" parameterType="BooksVO">
+	delete from books where book_no=#{bookNo}
+</delete>
+</mapper>
